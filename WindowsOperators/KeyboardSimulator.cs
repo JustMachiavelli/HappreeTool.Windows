@@ -231,5 +231,41 @@ namespace HappreeTool.Windows.WindowsOperators
             { '>', 0x34 },
             { '?', 0x35 }
         };
+        
+        public const ushort VK_CONTROL = 0x11;
+        public const ushort VK_A = 0x41;
+        public const ushort VK_V = 0x56;
+
+        /// <summary>
+        /// 输入Ctrl+C这样的组合键
+        /// </summary>
+        /// <param name="modifier"></param>
+        /// <param name="key"></param>
+        public static void SendHotKey(ushort modifier, ushort key)
+        {
+            SendKey(modifier);
+
+            Thread.Sleep(50);
+
+            SendKey(key);
+
+            Thread.Sleep(50);
+
+            SendKey(key, true);
+
+            Thread.Sleep(50);
+
+            SendKey(modifier, true);
+        }
+
+        public static void Paste()
+        {
+            SendHotKey(VK_CONTROL, VK_V);
+        }
+
+        public static void SelectAll()
+        {
+            SendHotKey(VK_CONTROL, VK_A);
+        }
     }
 }
